@@ -24,5 +24,8 @@
   "bugs": {
     "url": "https://github.com/Devarasen/EcoRewards/issues"
   },
-  "homepage": "https://github.com/Devarasen/EcoRewards#readme"
+  "homepage": "https://github.com/Devarasen/EcoRewards#readme",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
 }
