@@ -40,3 +40,176 @@
 .read-the-docs {
   color: #888;
 }
+
+
+/* Styles for the landing page */
+.LandingPage {
+  background-color: #f4f4f4;
+  padding: 20px;
+  text-align: center;
+}
+
+.LandingPage h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.LandingPage .sign-in-form,
+.LandingPage .sign-up-form {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 400px;
+}
+
+.LandingPage form {
+  display: flex;
+  flex-direction: column;
+}
+
+.LandingPage .form-group {
+  margin-bottom: 15px;
+}
+
+.LandingPage label {
+  font-weight: bold;
+}
+
+.LandingPage input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.LandingPage button {
+  background-color: #3a936b;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Styles for the dashboard */
+.Dashboard {
+  padding: 20px;
+}
+
+.Dashboard h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.Dashboard h3 {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.Dashboard .eco-actions {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+
+.Dashboard ul {
+  list-style: none;
+}
+
+.Dashboard .donation-section {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 400px;
+}
+
+.Dashboard input {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.Dashboard button {
+  background-color: #3a936b;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Styles for the community board */
+.CommunityBoard {
+  padding: 20px;
+}
+
+.CommunityBoard h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.CommunityBoard .post-form {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.CommunityBoard textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.CommunityBoard button {
+  background-color: #3a936b;
+  color: #fff;
+  border: none;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.CommunityBoard .posts {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.CommunityBoard .post {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+.CommunityBoard .post img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.CommunityBoard .post-user span {
+  font-weight: bold;
+}
+
+.CommunityBoard .post-content p {
+  margin: 10px 0;
+}
+
+.CommunityBoard .post-timestamp {
+  color: #777;
+  font-size: 14px;
+}
