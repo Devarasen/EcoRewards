@@ -1,5 +1,6 @@
 import ReactDOM from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
+import './index.css';
 
 import App from './App.jsx'
 import CommunityBoard from './pages/CommunityBoard.jsx'

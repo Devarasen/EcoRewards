@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const CommunityBoard = () => {
   const [posts, setPosts] = useState([]);
