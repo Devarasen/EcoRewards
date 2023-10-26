@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const Dashboard = () => {
   // Replace this mock data with actual data retrieval logic
