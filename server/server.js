@@ -1,24 +1,47 @@
 const express = require("express");
+const { ApolloServer } = require("@apollo/server");
+const { expressMiddleware } = require("@apollo/server/express4");
 const path = require("path");
 
+const { typeDefs, resolvers } = require("./schemas");
+const db = require("./config/connection");
+
+const PORT = process.env.PORT || 3001;
 const app = express();
-const port = process.env.PORT || 3001; // You can change the port as needed
-
-// Add this development route
-app.get("/", (req, res) => {
-  res.send("Hello, this is the development server!");
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
 });
 
-if (process.env.NODE_ENV === "production") {
-  // Serve static files from the "client/dist" directory
-  app.use(express.static(path.join(__dirname, "client", "dist")));
+// Create a new instance of an Apollo server with the GraphQL schema
+const startApolloServer = async () => {
+  await server.start();
 
-  // Handle React routing, return all requests to the React app
-  app.get("*", function (req, res) {
-    res.sendFile(path.join(__dirname, "client", "dist", "index.html"));
+  app.use(express.urlencoded({ extended: false }));
+  app.use(express.json());
+
+  app.use(
+    "/graphql",
+    expressMiddleware(server, {
+      // context: authMiddleware,
+    })
+  );
+
+  if (process.env.NODE_ENV === "production") {
+    app.use(express.static(path.join(__dirname, "../client/dist")));
+
+    app.get("*", (req, res) => {
+      res.sendFile(path.join(__dirname, "../client/dist/index.html"));
+    });
+  }
+
+  db.once("open", () => {
+    app.listen(PORT, () => {
+      console.log(`API server running on port ${PORT}!`);
+      console.log(`Use GraphQL at http://localhost:${PORT}/graphql`);
+    });
   });
-}
+};
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+// Call the async function to start the server
+startApolloServer();
