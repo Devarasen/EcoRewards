@@ -1,3 +1,3 @@
-const resolvers = null;
+const resolvers = {};
 
 module.exports = resolvers;
