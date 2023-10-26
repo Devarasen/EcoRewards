@@ -1,0 +1,19 @@
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center; 
+}
+
+nav li {
+    margin: 10px;
+    padding: 0; 
+    cursor: pointer;
+    border-radius: 15px;
+}
+
+header {
+    background-color: rgb(27, 255, 84);
+    padding: 15px;
+}

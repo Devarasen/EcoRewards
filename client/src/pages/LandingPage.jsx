@@ -1,5 +1,6 @@
+import '../styles/LandingPage.css';
 
-const LandingPage = () => {
+function LandingPage () {
   return (
     <div className="landing-page">
       <div className="sign-in-form">
@@ -36,6 +37,6 @@ const LandingPage = () => {
       </div>
     </div>
   );
-};
+}
 
 export default LandingPage;
