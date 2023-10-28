@@ -22,11 +22,6 @@ const resolvers = {
   },
 
   Mutation: {
-    addUser: async (_, { input }) => {
-      const user = await User.create(input);
-      const token = signToken(user);
-      return { token, user };
-    },
     login: async (_, { input }) => {
       const { email, password } = input;
       const user = await User.findOne({ email });
@@ -44,12 +39,14 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
     registerUser: async (_, { username, email, password }) => {
       const newUser = new User({ username, email, password, greencoins: 0 });
       const savedUser = await newUser.save();
       const token = signToken(savedUser);
       return { token, savedUser };
     },
+
     postTask: async (_, { userId, title, description, proof }) => {
       const user = await User.findById(userId);
       const newTask = new Task({
@@ -61,17 +58,20 @@ const resolvers = {
       });
       return await newTask.save();
     },
+
     awardGreenCoin: async (_, { taskId, coins }) => {
       const task = await Task.findById(taskId);
       task.greencoinsEarned += coins;
       await task.save();
       return task;
     },
+
     createCommunityPost: async (_, { userId, content }) => {
       const user = await User.findById(userId);
       const newPost = new CommunityPost({ user, content });
       return await newPost.save();
     },
+
     createComment: async (_, { postId, userId, content }) => {
       const user = await User.findById(userId);
       const post = await CommunityPost.findById(postId);
