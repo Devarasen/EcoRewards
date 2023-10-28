@@ -1,0 +1,17 @@
+.dashboard {
+    padding: 30px;
+    border: solid green 5px;
+    min-height: 80vh;
+    text-align: center;    
+}
+
+.dashboard h2 {
+    border: 2px solid black; 
+    border-radius: 20px;
+    background-color: #1c681f;
+    color: white;
+    display: inline-block;
+    padding: 10px;
+    margin-bottom: 10px;
+    margin-top: 0px;
+}

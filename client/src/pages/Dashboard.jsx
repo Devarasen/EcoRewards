@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import '../styles/Dashboard.css';
 
 const Dashboard = () => {
   // Replace this mock data with actual data retrieval logic

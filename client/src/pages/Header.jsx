@@ -6,15 +6,15 @@ function Header () {
   return (
     <header className="app-header">
       <nav className="header-nav">
-        <Link to="/" className="logo">
-          EcoRewards
-        </Link>
+        <span className="logo-container">
+            <Link to="/" className="logo">EcoRewards</Link>
+        </span>
         <ul className="nav-links">
           <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
           <li>
-            <Link to="/profile">Profile</Link>
+            <Link to="/community">Community Board</Link>
           </li>
           <li>
             <Link to="/signout">Sign Out</Link>
