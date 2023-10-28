@@ -1,18 +1,36 @@
 import { Outlet } from 'react-router-dom';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import Navbar from './components/Navbar';
+import Footer from './pages/Footer';
+import AuthService from './utils/auth';  // Ensure proper casing
+import './index.css';
 
-import Header from './pages/Header'
-import Footer from './pages/Footer'
+const httpLink = createHttpLink({
+  uri: '/graphql',
+});
+
+const authLink = setContext((_, { headers }) => {
+  const userToken = AuthService.getToken();
+  console.log("Retrieved Token:", userToken); // Keep only one console log
+  const authorization = userToken ? `Bearer ${userToken}` : '';
+  return {
+    headers: {
+      ...headers,
+      authorization,
+    },
+  };
+});
 
 const client = new ApolloClient({
-  uri: '/graphql',
+  link: authLink.concat(httpLink),  // Combine authLink with httpLink
   cache: new InMemoryCache(),
 });
 
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Header />
+      <Navbar />
       <Outlet />
       <Footer />
     </ApolloProvider>
@@ -20,5 +38,4 @@ function App() {
 }
 
 export default App;
-
 
