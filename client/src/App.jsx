@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import Navbar from './components/Navbar';
+// import Navbar from './components/Navbar';
 import Footer from './pages/Footer';
 import AuthService from './utils/auth';  // Ensure proper casing
 import './index.css';
@@ -30,7 +30,7 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <Navbar />
+      {/* <Navbar /> */}
       <Outlet />
       <Footer />
     </ApolloProvider>
