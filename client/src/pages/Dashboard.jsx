@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Dashboard.css';
 import AuthService from '../utils/auth'; 
 const Dashboard = () => {
-    const [currentUser,] = useState({
+    const [currentUser, ] = useState({
         username: AuthService.getUsername(),  
         ecoActions: [],
         totalGreenCoins: 0
@@ -18,31 +18,57 @@ const Dashboard = () => {
 
     return (
         <div className="dashboard">
-            <h2>Dashboard</h2>
-            <h3>Welcome, {currentUser.username}!</h3>
+            
             <div className="eco-actions">
-                <h4>Your Eco-Actions:</h4>
+                {/* <h2>Dashboard</h2> */}
+                <h3>Welcome, {currentUser.username}!</h3>
+                <h4>Recent Eco-Actions:</h4>
                 <ul>
                     {currentUser.ecoActions.map((action, index) => (
                         <li key={index}>
                             {action.action} - {action.greenCoinsEarned} Green Coins
                         </li>
                     ))}
-                </ul>
-                <p>Total Green Coins Earned: {currentUser.totalGreenCoins}</p>
+                </ul>                
             </div>
-            <div className="donation-section">
-                <h4>Make a Donation:</h4>
-                <input
-                    type="number"
-                    placeholder="Donation Amount (in Green Coins)"
-                    value={donationAmount}
-                    onChange={(e) => setDonationAmount(e.target.value)}
-                />
-                <button onClick={handleDonation}>Donate</button>
+
+            <div className='aside-section'>
+                <div className="coin-section">
+                    <p>Total Green Coins Earned: {currentUser.totalGreenCoins}</p>
+                    <h4>Make a Donation:</h4>
+                    <div className='donation-input'>
+                        <input
+                            type="number"
+                            placeholder="Donation Amount"
+                            value={donationAmount}
+                            onChange={(e) => setDonationAmount(e.target.value)}
+                        />
+                        <div className="tooltip-container">
+                            <button onClick={handleDonation}> 💰 </button>
+                            <span className="tooltip">Donate</span>
+                        </div>
+                    </div>
+                </div>
+                <div className='profile-section'>
+                    <p>Set your Name:</p>
+                    <input></input>
+                    <button onClick={handleDonation}> Set name </button>
+                    <p>Set your Bio:</p>
+                    <input></input>
+                    <button onClick={handleDonation}> Set bio </button>
+                    <p>Set your Avatar:</p>
+                    <button onClick={handleDonation}> Choose Avatar </button>
+                </div>
             </div>
         </div>
     );
 };
 
 export default Dashboard;
+
+
+
+
+
+
+
