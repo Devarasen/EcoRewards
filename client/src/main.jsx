@@ -6,7 +6,7 @@ import CommunityBoard from './pages/CommunityBoard.jsx'
 import Dashboard from './pages/Dashboard.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import LandingPage from './pages/LandingPage.jsx'
-
+import Profile from './pages/Profile.jsx'
 
 const router = createBrowserRouter([
   {
@@ -26,6 +26,11 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <Dashboard />
       },
+      {
+        path: '/profile/:id',  
+        element: <Profile />
+      }
+
     ]
   }
 ])
