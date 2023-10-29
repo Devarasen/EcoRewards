@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import '../styles/Header.css';
 
-
 function Header () {
   return (
-    <header className="app-header">
+    <header>
       <nav className="header-nav">
         <span className="logo-container">
-            <Link to="/" className="logo">EcoRewards</Link>
+            <Link to="/" className="logo">💰 EcoRewards 🐢</Link>
         </span>
         <ul className="nav-links">
           <li>
