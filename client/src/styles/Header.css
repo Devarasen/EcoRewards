@@ -1,10 +1,7 @@
 header {
     background-color: rgb(27, 255, 84);
-    padding: 15px;
+    padding: 5px;
     width: 100%;
-}
-
-.app-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -59,5 +56,4 @@ nav li a { /* Targeting the anchor tags within the list items */
 
 nav li a:hover { /* Optional: add a hover effect if you wish */
     color: rgb(0, 0, 0); /* Change to a different color on hover, for example */
-    transform: scale(1.1);
 }
