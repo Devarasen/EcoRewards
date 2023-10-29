@@ -2,7 +2,7 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 type User {
-    id: ID!
+    _id: ID!
     username: String!
     email: String!
     greencoins: Int!
@@ -10,7 +10,7 @@ type User {
 }
 
 type Task {
-    id: ID!
+    _id: ID!
     title: String!
     description: String!
     user: User!
@@ -19,7 +19,7 @@ type Task {
 }
 
 type CommunityPost {
-    id: ID!
+    _id: ID!
     user: User!
     content: String!
     createdAt: String!
@@ -27,7 +27,7 @@ type CommunityPost {
 }
 
 type Comment {
-    id: ID!
+    _id: ID!
     user: User!
     content: String!
     createdAt: String!
@@ -67,3 +67,6 @@ type Auth {
 `;
 
 module.exports = typeDefs;
+
+
+
