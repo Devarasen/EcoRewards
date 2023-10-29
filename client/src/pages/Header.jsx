@@ -1,23 +1,38 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import '../styles/Header.css';
+import Auth from '../utils/auth';  
 
-function Header () {
+function Header() {
+  const navigate = useNavigate();
+  const isLoggedIn = Auth.loggedIn();
+
+  const handleSignOut = () => {
+    Auth.logout();
+    navigate('/');  
+  };
+
   return (
     <header>
       <nav className="header-nav">
         <span className="logo-container">
-            <Link to="/" className="logo">💰 EcoRewards 🐢</Link>
+          <Link to="/" className="logo">💰 EcoRewards 🐢</Link>
         </span>
         <ul className="nav-links">
-          <li>
-            <Link to="/dashboard">Dashboard</Link>
-          </li>
-          <li>
-            <Link to="/community">Community Board</Link>
-          </li>
-          <li>
-            <Link to="/signout">Sign Out</Link>
-          </li>
+          {isLoggedIn && (
+            <>
+              <li>
+                <Link to="/dashboard">Dashboard</Link>
+              </li>
+              <li>
+                <Link to="/community">Community Board</Link>
+              </li>
+            </>
+          )}
+          {isLoggedIn && (
+            <li>
+              <a href="#" onClick={handleSignOut}>Sign Out</a>
+            </li>
+          )}
         </ul>
       </nav>
     </header>
