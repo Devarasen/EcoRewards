@@ -5,7 +5,6 @@ type User {
     id: ID!
     username: String!
     email: String!
-    password: String!
     greencoins: Int!
     token: String
 }
