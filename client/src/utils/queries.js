@@ -10,39 +10,20 @@ export const GET_ME = gql`
   }
 `;
 
-// export const GET_ALL_TASKS = gql`
-//   query GetAllTasks {
-//     getAllTasks {
-//       id
-//       title
-//       description
-//       user {
-//         username
-//       }
-//       proof
-//       greencoinsEarned
-//     }
-//   }
-// `;
 
 
-// export const GET_COMMUNITY_POSTS = gql`
-//   query GetCommunityPosts {
-//     getCommunityPosts {
-//       id
-//       user {
-//         username
-//       }
-//       content
-//       createdAt
-//       comments {
-//         id
-//         user {
-//           username
-//         }
-//         content
-//         createdAt
-//       }
-//     }
-//   }
-
+export const GET_ALL_POSTS = gql`
+    query GetAllPosts {
+        getAllPosts {
+            _id
+            content
+            timestamp
+            author {
+                username
+                profile {
+                    image
+                }
+            }
+        }
+    }
+  `;

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Dashboard.css';
 import AuthService from '../utils/auth'; 
 const Dashboard = () => {
-    const [currentUser, setCurrentUser] = useState({
+    const [currentUser,] = useState({
         username: AuthService.getUsername(),  
         ecoActions: [],
         totalGreenCoins: 0
