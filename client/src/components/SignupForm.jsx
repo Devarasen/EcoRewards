@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import { Form, Button, Alert } from 'react-bootstrap';
+import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
-import { REGISTER_USER } from '../utils/mutations'; // <-- Updated this import
+import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
 
 const SignupForm = () => {
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
   const [validated, setValidated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  const [registerUser] = useMutation(REGISTER_USER); // <-- Updated this line
+  
+  const [addUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
     const { name, value } = event.target;
@@ -18,20 +18,17 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
-      setValidated(true);
+    if (!userFormData.username || !userFormData.email || !userFormData.password) {
+      setValidated(true);  
       return; 
     }
 
     try {
-      const { data } = await registerUser({ // <-- Updated this line
+      const { data } = await addUser({
         variables: { input: { ...userFormData } },
       });
 
-      const user = data.registerUser; // <-- Updated this line
+      const user = data.addUser;
 
       Auth.login(user.token);
     } catch (err) {
@@ -51,14 +48,12 @@ const SignupForm = () => {
 
   return (
     <>
-      <Form noValidate validated={validated} onSubmit={handleFormSubmit}>
-        <Alert dismissible onClose={() => setShowAlert(false)} show={showAlert} variant='danger'>
-          Something went wrong with your signup!
-        </Alert>
-
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='username'>Username</Form.Label>
-          <Form.Control
+      <form onSubmit={handleFormSubmit}>
+        {showAlert && <div className='alert alert-danger'>Something went wrong with your signup!</div>}
+        
+        <div>
+          <label htmlFor='username'>Username</label>
+          <input 
             type='text'
             placeholder='Your username'
             name='username'
@@ -66,12 +61,11 @@ const SignupForm = () => {
             value={userFormData.username}
             required
           />
-          <Form.Control.Feedback type='invalid'>Username is required!</Form.Control.Feedback>
-        </Form.Group>
+        </div>
 
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='email'>Email</Form.Label>
-          <Form.Control
+        <div>
+          <label htmlFor='email'>Email</label>
+          <input 
             type='email'
             placeholder='Your email address'
             name='email'
@@ -79,12 +73,11 @@ const SignupForm = () => {
             value={userFormData.email}
             required
           />
-          <Form.Control.Feedback type='invalid'>Email is required!</Form.Control.Feedback>
-        </Form.Group>
+        </div>
 
-        <Form.Group className='mb-3'>
-          <Form.Label htmlFor='password'>Password</Form.Label>
-          <Form.Control
+        <div>
+          <label htmlFor='password'>Password</label>
+          <input 
             type='password'
             placeholder='Your password'
             name='password'
@@ -92,15 +85,9 @@ const SignupForm = () => {
             value={userFormData.password}
             required
           />
-          <Form.Control.Feedback type='invalid'>Password is required!</Form.Control.Feedback>
-        </Form.Group>
-        <Button
-          disabled={!(userFormData.username && userFormData.email && userFormData.password)}
-          type='submit'
-          variant='success'>
-          Submit
-        </Button>
-      </Form>
+        </div>
+        <button type='submit' disabled={!(userFormData.username && userFormData.email && userFormData.password)}>Submit</button>
+      </form>
     </>
   );
 };

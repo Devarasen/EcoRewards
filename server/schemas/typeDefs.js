@@ -3,7 +3,7 @@ const { gql } = require('apollo-server-express');
 const typeDefs = gql`
 type User {
     id: ID!
-    username: String!
+    username: String
     email: String!
     password: String!
     greencoins: Int!
@@ -42,9 +42,8 @@ type Query {
 }
 
 type Mutation {
-    addUser(input: UserInput!): AuthPayload!
-    login(input: LoginInput!): AuthPayload!
-    registerUser(username: String!, email: String!, password: String!): AuthPayload!
+    login(input: LoginInput!): Auth
+    addUser(input: UserInput!): Auth
     postTask(userId: ID!, title: String!, description: String!, proof: String): Task!
     awardGreenCoin(taskId: ID!, coins: Int!): Task!
     createCommunityPost(userId: ID!, content: String!): CommunityPost!
@@ -62,9 +61,9 @@ input LoginInput {
   password: String!
 }
 
-type AuthPayload {
-  token: String!
-  user: User!
+type Auth {
+  token: ID!
+  user: User
 }
 `;
 
