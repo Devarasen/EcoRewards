@@ -23,6 +23,7 @@ const typeDefs = gql`
     timestamp: String!
     comments: [Comment]
     donations: [Donation]
+    
   }
 
   type Comment {
@@ -53,6 +54,7 @@ const typeDefs = gql`
   type Mutation {
     login(input: LoginInput!): Auth
     addUser(input: UserInput!): Auth
+    createPost(content: String!): Post
   }
 
   input UserInput {

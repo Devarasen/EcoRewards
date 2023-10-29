@@ -66,6 +66,21 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+
+    createPost: async (parent, { content }, context) => {
+      if (!context.user) {
+          throw new AuthenticationError("You need to be logged in to post!");
+      }
+      
+      const newPost = new Post({
+          content,
+          author: context.user._id,
+          timestamp: new Date().toISOString(),
+      });
+
+      await newPost.save();
+      return newPost;
+  }
   },
 };
 
