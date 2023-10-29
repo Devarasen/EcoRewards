@@ -1,9 +1,35 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+const { Schema, model } = require('mongoose');
 
-const userSchema = new Schema({
-  // schema definition here
-});
 
-const User = mongoose.model('User', userSchema);
+
+const userSchema = new Schema(
+  {
+    username: {
+      type: String,
+      required: true,
+      unique: true,
+    },
+    email: {
+      type: String,
+      required: true,
+      unique: true,
+      match: [/.+@.+\..+/, 'Must use a valid email address'],
+    },
+    password: {
+      type: String,
+      required: true,
+    },
+   
+
+  },
+
+  {
+    toJSON: {
+      virtuals: true,
+    },
+  }
+);
+
+const User = model('User', userSchema);
+
 module.exports = User;

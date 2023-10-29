@@ -5,9 +5,8 @@ import Auth from '../utils/auth';
 
 const SignupForm = () => {
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
-  const [validated, setValidated] = useState(false);
+  const [validated] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
-  
   const [addUser] = useMutation(ADD_USER);
 
   const handleInputChange = (event) => {
@@ -18,7 +17,10 @@ const SignupForm = () => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
-    if (!userFormData.username || !userFormData.email || !userFormData.password) {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
       setValidated(true);  
       return; 
     }
