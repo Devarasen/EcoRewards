@@ -8,6 +8,7 @@ const typeDefs = gql`
     profile: UserProfile
     posts: [Post]
     donationsReceived: [Donation]
+    greenCoins: Int
   }
 
   type UserProfile {
@@ -55,6 +56,7 @@ const typeDefs = gql`
     login(input: LoginInput!): Auth
     addUser(input: UserInput!): Auth
     createPost(content: String!): Post
+    makeDonation(donorId: ID!, receiverId: ID!, amount: Int!): Donation
   }
 
   input UserInput {

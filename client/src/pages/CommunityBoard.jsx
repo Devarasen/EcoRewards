@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ALL_POSTS } from '../utils/queries';
@@ -49,6 +50,9 @@ const CommunityBoard = () => {
           <div className="post" key={post._id}>
             <div className="post-user">
               <img src={post?.author?.profile?.image} alt="User Avatar" />
+              <Link to={`/profile/${post?.author?._id}`}>
+            <span>{post?.author?.username}</span>
+            </Link>
               <span>{post?.author?.username}</span>
             </div>
             <div className="post-content">
