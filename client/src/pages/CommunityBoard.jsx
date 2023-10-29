@@ -41,7 +41,7 @@ const CommunityBoard = () => {
           placeholder="Share your eco-action..."
           value={newPost}
           onChange={(e) => setNewPost(e.target.value)}
-          rows="2"
+      
         />
         <button onClick={handlePostSubmit}>Post</button>
       </div>
