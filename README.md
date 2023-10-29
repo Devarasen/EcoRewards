@@ -4,6 +4,40 @@ Heroku Deployed App: https://ecorewards-2f037cf0b8c1.herokuapp.com/
 Github Repo: https://github.com/Devarasen/EcoRewards
 
 
+# Model Requirements
+
+## EcoRewards Website: MongoDB Model Requirements
+
+### User Model:
+
+Capabilities for user signup and login.
+Each user should have a profile page.
+
+### Post Model:
+
+Users should be able to create posts.
+All user posts should appear on their individual profile page.
+A live feed page will display all users' posts.
+Each post should have a timestamp of when it was created.
+
+### Comment Model:
+
+Users should be able to comment on any post.
+Each comment should have a timestamp of when it was made.
+
+
+### Donation Model:
+
+Posts should have an associated donation button.
+Record donation information:
+Timestamp of when the donation was made.
+Donor details (from whom).
+Receiver details (to whom).
+Profile pages should:
+Display an aggregated total of donations received by the user.
+Include a dropdown feature to view all donations made to the user, showing the donor and timestamp.
+
+Note: Implementation of donation processing (e.g., using Stripe) will be handled later.
 
 
 # 23 Final Project: MERN Stack Single-Page Application

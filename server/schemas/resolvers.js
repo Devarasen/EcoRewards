@@ -1,8 +1,6 @@
-
-const { User } = require('../models');
-const { signToken} = require("../utils/auth");
-const { AuthenticationError } = require('apollo-server-express');
-
+const { User, Post, Comment, Donation } = require("../models");
+const { signToken } = require("../utils/auth");
+const { AuthenticationError } = require("apollo-server-express");
 
 const resolvers = {
   Query: {
@@ -10,7 +8,35 @@ const resolvers = {
       if (context.user) {
         return User.findOne({ _id: context.user._id });
       }
-      throw new AuthenticationError('Not logged in.');
+      throw new AuthenticationError("Not logged in.");
+    },
+    getAllPosts: async () => {
+      try {
+        return await Post.find().populate(["author", "comments", "donations"]);
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    getUserPosts: async (_, { userId }) => {
+      try {
+        return await Post.find({ author: userId }).populate([
+          "author",
+          "comments",
+          "donations",
+        ]);
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    getUserProfile: async (_, { userId }) => {
+      try {
+        return await User.findById(userId).populate([
+          "posts",
+          "donationsReceived",
+        ]);
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
 
@@ -24,7 +50,7 @@ const resolvers = {
 
     login: async (parent, { input }, context) => {
       const { email, password } = input;
-      const user = await User.findOne({email});
+      const user = await User.findOne({ email });
 
       if (!user) {
         throw new AuthenticationError("No user found with that email address.");
@@ -36,11 +62,10 @@ const resolvers = {
         throw new AuthenticationError("Incorrect password.");
       }
 
+      console.log(user);
       const token = signToken(user);
       return { token, user };
     },
-
-  
   },
 };
 

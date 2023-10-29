@@ -1,72 +1,75 @@
-const { gql } = require('apollo-server-express');
+const { gql } = require("apollo-server-express");
 
 const typeDefs = gql`
-type User {
+  type User {
     _id: ID!
     username: String!
     email: String!
-    greencoins: Int!
-    token: String
-}
+    profile: UserProfile
+    posts: [Post]
+    donationsReceived: [Donation]
+  }
 
-type Task {
-    _id: ID!
-    title: String!
-    description: String!
-    user: User!
-    proof: String
-    greencoinsEarned: Int!
-}
+  type UserProfile {
+    name: String
+    bio: String
+    image: String
+  }
 
-type CommunityPost {
+  type Post {
     _id: ID!
-    user: User!
+    author: User
     content: String!
-    createdAt: String!
-    comments: [Comment!]!
-}
+    timestamp: String!
+    comments: [Comment]
+    donations: [Donation]
+  }
 
-type Comment {
+  type Comment {
     _id: ID!
-    user: User!
+    post: Post!
+    author: User!
     content: String!
-    createdAt: String!
-}
+    timestamp: String!
+  }
 
-type Query {
+  type Donation {
+    _id: ID!
+    post: Post!
+    donor: User!
+    receiver: User!
+    amount: Float!
+    timestamp: String!
+  }
+
+  type Query {
     me: User
     getUser(id: ID!): User
-    getAllTasks: [Task!]!
-    getCommunityPosts: [CommunityPost!]!
-}
+    getAllPosts: [Post]
+    getUserPosts(userId: ID!): [Post]
+    getUserProfile(userId: ID!): User
+  }
 
-type Mutation {
+  type Mutation {
     login(input: LoginInput!): Auth
     addUser(input: UserInput!): Auth
-    postTask(userId: ID!, title: String!, description: String!, proof: String): Task!
-    awardGreenCoin(taskId: ID!, coins: Int!): Task!
-    createCommunityPost(userId: ID!, content: String!): CommunityPost!
-    createComment(postId: ID!, userId: ID!, content: String!): Comment!
-}
+  }
 
-input UserInput {
-  username: String!
-  email: String!
-  password: String!
-}
+  input UserInput {
+    username: String!
+    email: String!
+    password: String!
+  }
 
-input LoginInput {
-  email: String!
-  password: String!
-}
+  input LoginInput {
+    email: String!
+    password: String!
+  }
 
-type Auth {
-  token: ID!
-  user: User
-}
+  type Auth {
+    token: ID!
+    user: User
+  }
 `;
 
 module.exports = typeDefs;
-
-
-

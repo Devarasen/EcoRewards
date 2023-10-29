@@ -53,10 +53,10 @@ db.once("open", async () => {
       return donation;
     });
 
-    // 7. Seed comments
+    // Seed comments
     await Comment.create(updatedCommentSeed);
 
-    // 8. Seed donations
+    // Seed donations
     await Donation.create(updatedDonationSeed);
   } catch (err) {
     console.error(err);
