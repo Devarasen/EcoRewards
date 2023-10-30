@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/Profile.css';
 import AuthService from '../utils/auth'; 
-const Dashboard = () => {
+const Profile = () => {
     const [currentUser, ] = useState({
         username: AuthService.getUsername(),  
         ecoActions: [],
