@@ -38,6 +38,20 @@ const resolvers = {
         throw new Error(error);
       }
     },
+    getAllComments: async () => {
+      try {
+        return await Comment.find().populate(["author", "post"]);
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    getCommentById: async (_, { id }) => {
+      try {
+        return await Comment.findById(id);
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
   },
 
   Mutation: {
@@ -69,18 +83,25 @@ const resolvers = {
 
     createPost: async (parent, { content }, context) => {
       if (!context.user) {
-          throw new AuthenticationError("You need to be logged in to post!");
+        throw new AuthenticationError("You need to be logged in to post!");
       }
-      
+
       const newPost = new Post({
-          content,
-          author: context.user._id,
-          timestamp: new Date().toISOString(),
+        content,
+        author: context.user._id,
+        timestamp: new Date().toISOString(),
       });
 
       await newPost.save();
       return newPost;
-  }
+    },
+  },
+
+  Post: {
+    comments: async (post) => {
+      // Fetch comments for the given post using the post's _id
+      return await Comment.find({ post: post._id });
+    },
   },
 };
 

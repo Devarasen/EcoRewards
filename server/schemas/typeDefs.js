@@ -24,7 +24,6 @@ const typeDefs = gql`
     timestamp: String!
     comments: [Comment]
     donations: [Donation]
-    
   }
 
   type Comment {
@@ -50,6 +49,8 @@ const typeDefs = gql`
     getAllPosts: [Post]
     getUserPosts(userId: ID!): [Post]
     getUserProfile(userId: ID!): User
+    getAllComments: [Comment]
+    getCommentById(id: ID!): Comment
   }
 
   type Mutation {
