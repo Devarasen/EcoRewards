@@ -58,6 +58,7 @@ const typeDefs = gql`
     addUser(input: UserInput!): Auth
     createPost(content: String!): Post
     makeDonation(donorId: ID!, receiverId: ID!, amount: Int!): Donation
+    addComment(postId: ID!, content: String!): Post
   }
 
   input UserInput {
