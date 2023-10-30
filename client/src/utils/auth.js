@@ -1,5 +1,4 @@
-import decode from 'jwt-decode';
-
+import decode from "jwt-decode";
 
 class AuthService {
   // get user's username
@@ -7,9 +6,9 @@ class AuthService {
     const token = this.getToken();
     if (token) {
       const decodedToken = decode(token);
-      return decodedToken.data.username;  // Extracting only username
+      return decodedToken.data.username; // Extracting only username
     }
-    return 'Guest';  // Default value
+    return "Guest"; // Default value
   }
 
   // check if user's logged in
@@ -28,21 +27,18 @@ class AuthService {
   }
 
   getToken() {
-    return localStorage.getItem('id_token');
+    return localStorage.getItem("id_token");
   }
 
   login(idToken) {
-    localStorage.setItem('id_token', idToken);
-    window.location.assign('/');
+    localStorage.setItem("id_token", idToken);
+    window.location.assign("/");
   }
 
   logout() {
-    localStorage.removeItem('id_token');
-    window.location.assign('/');
+    localStorage.removeItem("id_token");
+    window.location.assign("/");
   }
 }
 
 export default new AuthService();
-
-
-
