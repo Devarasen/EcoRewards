@@ -1,9 +1,9 @@
-.profile-container {
+.dashboard-container {
     display: flex;
     flex-direction: row;
 }
 
-.profile {
+.dashboard {
     padding: 30px;
     border: solid green 5px;
     min-height: 80vh;
@@ -12,7 +12,7 @@
     flex-direction: row;
 }
 
-.profile h2 {
+.dashboard h2 {
     border: 2px solid black; 
     border-radius: 20px;
     background-color: #1c681f;
@@ -23,19 +23,23 @@
     margin-top: 0px;
 }
 
-.user-info {
+.eco-actions {
     width: 100%;
     border-right: 3px solid black;
 }
 
-.user-details {
+.aside-section {
     display: flex;
     width: 50%;
     flex-direction: column;
 }
 
-.green-coins-display {
+.coin-section {
     padding-bottom: 30px;
+    border: 2px solid black; 
+    border-radius: 20px;
+    margin-left: 20px;
+    font-size: 10px;
 }
 
 .donation-input input {
@@ -75,14 +79,29 @@
     color: white;
     font-size: 14px;
     white-space: nowrap;
-    z-index: 10;
+    z-index: 10;  /* Ensure it sits on top */
 }
 
 .donation-input .tooltip-container:hover .tooltip {
     display: inline-block;
 }
 
-.bio-section button {
+.profile-section {
+    padding-bottom: 30px;
+    border: 2px solid black; 
+    border-radius: 20px;
+    margin-left: 20px;
+    font-size: 10px;
+    margin-top: 20px;
+ }
+
+ .profile-section input {
+    width: 60%;
+
+ }
+
+.profile-section button {
+    margin-left: 2px;
     padding: 5px;
     border: none;
     background-color: #4CAF50;
@@ -93,6 +112,7 @@
     transition: background-color 0.3s;
 }
 
-.bio-section button:hover {
+.profile-section button:hover {
     background-color: #45a049;
 }
+

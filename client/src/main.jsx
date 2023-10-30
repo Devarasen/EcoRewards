@@ -3,7 +3,6 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 
 import App from './App.jsx'
 import CommunityBoard from './pages/CommunityBoard.jsx'
-import Dashboard from './pages/Dashboard.jsx'
 import ErrorPage from './pages/ErrorPage.jsx'
 import LandingPage from './pages/LandingPage.jsx'
 import Profile from './pages/Profile.jsx'
@@ -23,11 +22,7 @@ const router = createBrowserRouter([
         element: <CommunityBoard />
       },
       {
-        path: '/dashboard',
-        element: <Dashboard />
-      },
-      {
-        path: '/profile/:id',  
+        path: '/profile/',  
         element: <Profile />
       }
 

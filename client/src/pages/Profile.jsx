@@ -1,49 +1,74 @@
 import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
 import '../styles/Profile.css';
+import AuthService from '../utils/auth'; 
+const Dashboard = () => {
+    const [currentUser, ] = useState({
+        username: AuthService.getUsername(),  
+        ecoActions: [],
+        totalGreenCoins: 0
+    });
+    const [donationAmount, setDonationAmount] = useState(0);
 
-const Profile = () => {
-  const { userId } = useParams();
   
-  // Initialize userData as null
-  const [userData, setUserData] = useState(null);
+    const handleDonation = () => {
+        if (donationAmount > 0) {
+            
+        }
+    };
 
-  useEffect(() => {
-    // This is just a mock fetch function; replace with your actual API call
-    async function fetchUserData() {
-      try {
-        // Replace with your API endpoint
-        const response = await fetch(`https://yourapi.com/user/${userId}`);
-        const data = await response.json();
-        setUserData(data);
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    }
-    
-    fetchUserData();
-  }, [userId]);  // useEffect will run every time userId changes
+    return (
+        <div className="dashboard">
+            
+            <div className="eco-actions">
+                {/* <h2>Dashboard</h2> */}
+                <h3>Welcome, {currentUser.username}!</h3>
+                <h4>Recent Eco-Actions:</h4>
+                <ul>
+                    {currentUser.ecoActions.map((action, index) => (
+                        <li key={index}>
+                            {action.action} - {action.greenCoinsEarned} Green Coins
+                        </li>
+                    ))}
+                </ul>                
+            </div>
 
-  // You can also add a loading state if needed
-
-  return (
-    <div className="profile-container">
-      <div className="profile-sidebar">
-        <img src={userData?.profile?.image} alt="User Avatar" className="profile-avatar" />
-        <h2>{userData?.username}</h2>
-        <p>{userData?.profile?.bio}</p>
-      </div>
-
-      <div className="profile-main-content">
-        <h3>Green Coins: {userData?.greenCoins}</h3>
-
-        <div className="donation-section">
-          <h4>Make a Donation</h4>
-          {/* Add your donation form here */}
+            <div className='aside-section'>
+                <div className="coin-section">
+                    <p>Total Green Coins Earned: {currentUser.totalGreenCoins}</p>
+                    <h4>Make a Donation:</h4>
+                    <div className='donation-input'>
+                        <input
+                            type="number"
+                            placeholder="Donation Amount"
+                            value={donationAmount}
+                            onChange={(e) => setDonationAmount(e.target.value)}
+                        />
+                        <div className="tooltip-container">
+                            <button onClick={handleDonation}> 💰 </button>
+                            <span className="tooltip">Donate</span>
+                        </div>
+                    </div>
+                </div>
+                <div className='profile-section'>
+                    <p>Set your Name:</p>
+                    <input placeholder="Set new name"></input>
+                    <button onClick={handleDonation}> Confirm </button>
+                    <p>Set your Bio:</p>
+                    <textarea rows="2" placeholder="Set new bio"></textarea>
+                    <button onClick={handleDonation}> Confirm </button>
+                    <p>Set your Avatar:</p>
+                    <button onClick={handleDonation}> Choose Avatar </button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
-export default Profile;
+export default Dashboard;
+
+
+
+
+
+
+

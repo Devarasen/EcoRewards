@@ -21,10 +21,10 @@ function Header() {
           {isLoggedIn && (
             <>
               <li>
-                <Link to="/dashboard">Dashboard</Link>
+                <Link to="/community">Community Board</Link>
               </li>
               <li>
-                <Link to="/community">Community Board</Link>
+                <Link to="/profile">Profile</Link>
               </li>
             </>
           )}
