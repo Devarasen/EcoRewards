@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery, useMutation } from '@apollo/client';
 import { GET_ALL_POSTS } from '../utils/queries';
 import { CREATE_POST, ADD_COMMENT } from '../utils/mutations'; 
@@ -7,6 +7,10 @@ import moment from 'moment';
 import '../styles/CommunityBoard.css';
 
 const CommunityBoard = () => {
+  useEffect(() => {
+    document.title = 'EcoRewards';
+  }, []);
+
   const [newPost, setNewPost] = useState('');
   const [newComment, setNewComment] = useState('');
   const [openedPostId, setOpenedPostId] = useState(null);

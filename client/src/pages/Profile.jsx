@@ -2,6 +2,11 @@ import React, { useState, useEffect } from 'react';
 import '../styles/Profile.css';
 import AuthService from '../utils/auth'; 
 const Profile = () => {
+
+    useEffect(() => {
+        document.title = 'Profile';
+      }, []);
+
     const [currentUser, ] = useState({
         username: AuthService.getUsername(),  
         ecoActions: [],
