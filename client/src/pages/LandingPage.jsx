@@ -29,12 +29,10 @@ function LandingPage() {
 
   return (
     <div className="landing-page">
-      <div className="log-in-form">
-        <h2>Log In</h2>
+      <div className="log-in-form">        
         <LoginForm onLoginSuccess={handleSuccessfulLogin} />
       </div>
-      <div className="sign-up-form">
-        <h2>Sign Up</h2>
+      <div className="sign-up-form">        
         <SignUpForm onSignUpSuccess={handleSuccessfulSignUp} />
       </div>
     </div>

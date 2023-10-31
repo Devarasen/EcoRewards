@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import './Component.css';
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
@@ -49,6 +50,8 @@ const LoginForm = () => {
       <form onSubmit={handleFormSubmit}>
         {showAlert && <div className='alert alert-danger'>Something went wrong with your login credentials!</div>}
         <div>
+          <h2>Log In</h2>
+          <br />
           <label htmlFor='email'>Email : </label>
           <input 
             type='text'
