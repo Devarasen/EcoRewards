@@ -17,7 +17,6 @@ Github Repo: https://github.com/Devarasen/EcoRewards
 - [Usage](#usage)
 - [Features](#features)
   - [User Authentication](#user-authentication)
-  - [Eco-Tasks](#eco-tasks)
   - [Community Board](#community-board)
 - [Technical Stack](#technical-stack)
 - [Credits](#credits)
@@ -39,11 +38,6 @@ With growing concerns about climate change and environmental degradation, there 
 
 - User registration and login functionality using JWT (JSON Web Tokens).
 - User profiles to store accumulated points, badges, and redemption history.
-
-### Eco-Tasks
-
-- Daily and weekly eco-friendly tasks to encourage users to adopt sustainable practices.
-- Tasks range from simple (e.g., using a reusable water bottle) to complex (e.g., installing solar panels).
 
 ### Community Board
 
