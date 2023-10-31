@@ -13,6 +13,8 @@ const userIdAuth = AuthService.getUserId();
 const Profile = () => {
     const { userIdParams } = useParams();
 
+    const [activeUserId, setActiveUserId] = useState(null);
+
     const [currentUser, setCurrentUser] = useState({
         username: AuthService.getUsername(),
         totalGreenCoins: 0,
@@ -32,15 +34,22 @@ const Profile = () => {
                             },
                         },
                     });
+                    cache.modify({
+                        fields: {
+                            getAllPosts(existingPosts = [], { readField }) {
+                                return existingPosts.filter(postRef => postId !== readField('_id', postRef));
+                            },
+                        },
+                    });
                 }
             });
+            refetch();
         } catch (err) {
             console.error("Error deleting post:", err);
         }
     };
 
     const [isOwnProfile, setIsOwnProfile] = useState(false);
-    const [activeUserId, setActiveUserId] = useState(null);
 
     useEffect(() => {
         if (!userIdParams || userIdParams === 'me' || userIdParams === userIdAuth) {
@@ -52,10 +61,18 @@ const Profile = () => {
         }
     }, [userIdParams, userIdAuth]);
 
-    const { loading, error, data } = useQuery(GET_SINGLE_USER_POST, {
+    const { loading, error, data, refetch } = useQuery(GET_SINGLE_USER_POST, {
+        refetchQueries: [{ query: GET_SINGLE_USER_POST }],
         variables: { userId: activeUserId },
         skip: !activeUserId  // Skip the query if activeUserId is not set
     });
+
+    useEffect(() => {
+        if (activeUserId) {
+            refetch();
+        }
+    }, [activeUserId]);
+    
 
     const formatTimestamp = (timestamp) => {
         if (!timestamp) return 'No timestamp available';
@@ -75,10 +92,16 @@ const Profile = () => {
         }
     };
 
-    const profileUsername = data && data.getUserPosts && data.getUserPosts[0] 
-                         ? data.getUserPosts[0].author.username 
-                         : ''
-    ;
+    const [profileUsername, setProfileUsername] = useState('');
+
+    useEffect(() => {
+        if (data && data.getUserPosts && data.getUserPosts.length > 0) {
+            setProfileUsername(data.getUserPosts[0].author.username);
+        } else if (isOwnProfile) {
+            // For own profile, if no posts are available, use the current user's username
+            setProfileUsername(currentUser.username);
+        }
+    }, [data, isOwnProfile]);
 
     useEffect(() => {
         document.title = isOwnProfile ? `${profileUsername}'s Profile` : `${profileUsername}'s Profile`;
@@ -103,16 +126,19 @@ const Profile = () => {
                             <div>
                                 <p>{post.content}</p>  
                             </div>
-                            <button onClick={() => handleDeletePost(post._id)}>Delete</button>                                                     
+                            {isOwnProfile ? <button onClick={() => handleDeletePost(post._id)}>Delete</button> : null}                                                      
                         </li>
                     ))}          
                 </ul>                
             </div>
 
+            
             <div className='aside-section'>
                 <div className="coin-section">
+                    {isOwnProfile && (
                     <p>Total Green Coins Earned: {currentUser.totalGreenCoins}</p>
-                    <h4>Make a Donation:</h4>
+                    )}
+                    <h4>Fund Eco-Cause:</h4>
                     <div className='donation-input'>
                         <input
                             type="number"
@@ -126,6 +152,8 @@ const Profile = () => {
                         </div>
                     </div>
                 </div>
+
+                {isOwnProfile && (
                 <div className='profile-section'>
                     <p>Set your Name:</p>
                     <input placeholder="Set new name"></input>
@@ -136,7 +164,9 @@ const Profile = () => {
                     <p>Set your Avatar:</p>
                     <button> Choose Avatar </button>
                 </div>
+                )}
             </div>
+            
         </div>
     );
 };
