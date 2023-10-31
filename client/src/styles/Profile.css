@@ -5,7 +5,6 @@
 
 .dashboard {
     padding: 30px;
-    border: solid green 5px;
     min-height: 80vh;
     text-align: center;    
     display: flex;
