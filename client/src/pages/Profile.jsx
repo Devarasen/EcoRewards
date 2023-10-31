@@ -76,7 +76,7 @@ const Profile = () => {
 
     const formatTimestamp = (timestamp) => {
         if (!timestamp) return 'No timestamp available';
-        const formattedDate = moment(Number(timestamp)).format('DD/MM/YY, h:mm a');
+        const formattedDate = moment(Number(timestamp)).format('DD/MM/YY h:mm a');
         return formattedDate === 'Invalid date' ? 'No timestamp available' : formattedDate;
     };
 
@@ -114,13 +114,13 @@ const Profile = () => {
     return (
         <div className="dashboard">
             <div className="eco-actions">
-                <h3>{isOwnProfile ? `Welcome, ${profileUsername}!` : `EcoProfile : ${profileUsername}`}</h3>
+                <h2>{isOwnProfile ? `Welcome, ${profileUsername}!` : `${profileUsername}'s Profile`}</h2>
                 <h4>Recent Posts: </h4>
                 <ul className="profile-posts-all">
                 {sortedPosts.map(post => (
                         <li key={post._id} className="profile-post">
                             <div className='profile-post-head'>
-                                <p>{post.author.username} ,</p>
+                                <p>{post.author.username} , </p> &nbsp;&nbsp;
                                 <p> {formatTimestamp(post.timestamp)}</p>
                             </div>
                             <div>
