@@ -40,6 +40,10 @@ const Profile = () => {
         return formattedDate === 'Invalid date' ? 'No timestamp available' : formattedDate;
     };
 
+    const sortedPosts = data && data.getUserPosts
+        ? [...data.getUserPosts].sort((a, b) => b.timestamp - a.timestamp)
+        : [];
+
     const [donationAmount, setDonationAmount] = useState(0);
   
     const handleDonation = () => {
@@ -66,12 +70,16 @@ const Profile = () => {
             <div className="eco-actions">
                 <h3>{isOwnProfile ? `Welcome, ${profileUsername}!` : `EcoProfile : ${profileUsername}`}</h3>
                 <h4>Recent Posts: </h4>
-                <ul>
-                {data && data.getUserPosts && data.getUserPosts.map(post => (
-                        <li key={post._id}>
-                            <p>{post.content}</p>
-                            <p>By: {post.author.username}</p>
-                            <p>Date: {formatTimestamp(post.timestamp)}</p>
+                <ul className="profile-posts-all">
+                {sortedPosts.map(post => (
+                        <li key={post._id} className="profile-post">
+                            <div>
+                                <p>{post.author.username}</p>
+                                <p> on {formatTimestamp(post.timestamp)}</p>
+                            </div>
+                            <div>
+                                <p>{post.content}</p>  
+                            </div>                                                     
                         </li>
                     ))}          
                 </ul>                
