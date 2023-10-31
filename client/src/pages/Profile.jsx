@@ -4,6 +4,8 @@ import AuthService from '../utils/auth';
 import { useQuery } from '@apollo/client';
 import { GET_SINGLE_USER_POST } from '../utils/queries';
 import { useParams } from 'react-router-dom';
+import { useMutation } from '@apollo/client';
+import { DELETE_POST } from '../utils/mutations';
 import moment from 'moment'; 
 
 const userIdAuth = AuthService.getUserId();
@@ -15,6 +17,27 @@ const Profile = () => {
         username: AuthService.getUsername(),
         totalGreenCoins: 0,
     });
+
+    const [deletePost] = useMutation(DELETE_POST);
+
+    const handleDeletePost = async (postId) => {
+        try {
+            await deletePost({
+                variables: { postId },
+                update: (cache) => {
+                    cache.modify({
+                        fields: {
+                            getUserPosts(existingPosts = [], { readField }) {
+                                return existingPosts.filter(postRef => postId !== readField('_id', postRef));
+                            },
+                        },
+                    });
+                }
+            });
+        } catch (err) {
+            console.error("Error deleting post:", err);
+        }
+    };
 
     const [isOwnProfile, setIsOwnProfile] = useState(false);
     const [activeUserId, setActiveUserId] = useState(null);
@@ -79,7 +102,8 @@ const Profile = () => {
                             </div>
                             <div>
                                 <p>{post.content}</p>  
-                            </div>                                                     
+                            </div>
+                            <button onClick={() => handleDeletePost(post._id)}>Delete</button>                                                     
                         </li>
                     ))}          
                 </ul>                
