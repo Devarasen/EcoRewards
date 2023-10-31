@@ -6,17 +6,21 @@ import LoginForm from '../components/LoginForm';
 import AuthService from '../utils/auth';  
 
 function LandingPage() {
-  const navigate = useNavigate();
 
+  useEffect(() => {
+    document.title = 'EcoRewards';
+  }, []);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (AuthService.loggedIn()) {
-      navigate('/profile');
+      navigate('/me');
     }
   }, [navigate]);
 
   const handleSuccessfulLogin = () => {
-    navigate('/profile');
+    navigate('/me');
   };
 
   const handleSuccessfulSignUp = () => {

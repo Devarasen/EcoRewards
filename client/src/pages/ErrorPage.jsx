@@ -2,6 +2,11 @@ import { useRouteError } from 'react-router-dom';
 import '../styles/ErrorPage.css';
 
 export default function ErrorPage() {
+
+  useEffect(() => {
+    document.title = 'Error Page - EcoRewards';
+  }, []);
+
   const error = useRouteError();
   console.error(error);
 
