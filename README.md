@@ -15,6 +15,11 @@ Github Repo: https://github.com/Devarasen/EcoRewards
 
 - [Installation](#installation)
 - [Usage](#usage)
+- [Features](#features)
+  - [User Authentication](#user-authentication)
+  - [Eco-Tasks](#eco-tasks)
+  - [Community Board](#community-board)
+- [Technical Stack](#technical-stack)
 - [Credits](#credits)
 - [License](#license)
 
@@ -39,12 +44,6 @@ With growing concerns about climate change and environmental degradation, there 
 
 - Daily and weekly eco-friendly tasks to encourage users to adopt sustainable practices.
 - Tasks range from simple (e.g., using a reusable water bottle) to complex (e.g., installing solar panels).
-- Users can submit proof (photos, receipts, etc.), which can be verified by community votes or AI image recognition.
-
-### Eco-Shop
-
-- Users can use their earned points to purchase eco-friendly products, discount vouchers, or donate to environmental causes.
-- Integration of Stripe for payment processing and donations.
 
 ### Community Board
 
