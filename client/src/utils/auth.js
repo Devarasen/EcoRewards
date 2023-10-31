@@ -11,6 +11,16 @@ class AuthService {
     return "Guest"; // Default value
   }
 
+  getUserId() {
+    const token = this.getToken();
+    if (token) {
+      const decodedToken = decode(token);
+      console.log(decodedToken.data);
+      return decodedToken.data._id; // Extracting only id
+    }
+    return "Guest"; // Default value
+  }
+
   // check if user's logged in
   loggedIn() {
     const token = this.getToken();
