@@ -32,6 +32,7 @@ function LandingPage() {
       <div className="log-in-form">        
         <LoginForm onLoginSuccess={handleSuccessfulLogin} />
       </div>
+      <br />
       <div className="sign-up-form">        
         <SignUpForm onSignUpSuccess={handleSuccessfulSignUp} />
       </div>
