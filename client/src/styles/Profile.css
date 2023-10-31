@@ -136,17 +136,22 @@
 }
 
 .profile-post div {
-    display: flex;  /* Makes elements within this div sit side-by-side */
-    align-items: center;  /* Vertically aligns elements on the same baseline */
+    display: flex;  
+    align-items: flex-start;  
 }
 
 .profile-post p {
     margin: 0;
-    margin-right: 10px;  /* Gives a little space between username and timestamp */
+    padding: 0;
 }
 
-/* Styling to make the username and timestamp appear on the same line */
 .profile-post div:first-child {
     margin-bottom: 10px;  /* Adds some space between the author details and content */
+}
+
+.profile-post-head {
+    font-size: 10px;
+    font-style: italic;
+    font-weight: bold;
 }
 
