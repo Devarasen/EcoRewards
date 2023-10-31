@@ -13,8 +13,8 @@ Github Repo: https://github.com/Devarasen/EcoRewards
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
+- [Project Overview](#project-overview)
+- [Motivation](#motivation)
 - [Features](#features)
   - [User Authentication](#user-authentication)
   - [Community Board](#community-board)
