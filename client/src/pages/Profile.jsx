@@ -73,9 +73,9 @@ const Profile = () => {
                 <ul className="profile-posts-all">
                 {sortedPosts.map(post => (
                         <li key={post._id} className="profile-post">
-                            <div>
-                                <p>{post.author.username}</p>
-                                <p> on {formatTimestamp(post.timestamp)}</p>
+                            <div className='profile-post-head'>
+                                <p>{post.author.username} ,</p>
+                                <p> {formatTimestamp(post.timestamp)}</p>
                             </div>
                             <div>
                                 <p>{post.content}</p>  

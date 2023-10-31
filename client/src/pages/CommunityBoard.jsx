@@ -12,7 +12,7 @@ const CommunityBoard = () => {
   }, []);
 
   const [newPost, setNewPost] = useState('');
-  const [newComment, setNewComment] = useState('');
+  const [newComment, setNewComment] = useState({});
   const [openedPostId, setOpenedPostId] = useState(null);
 
   const { data, loading, error } = useQuery(GET_ALL_POSTS);
@@ -41,15 +41,16 @@ const CommunityBoard = () => {
   };
 
   const handleCommentSubmit = async (postId) => {
-    if (newComment.trim() !== '') {
-      try {
-        await addComment({ variables: { postId, content: newComment } });
-        setNewComment('');
-      } catch (err) {
-        console.error('Error adding comment:', err);
-      }
+    const postComment = newComment[postId];
+    if (postComment && postComment.trim() !== '') {
+       try {
+          await addComment({ variables: { postId, content: postComment } });
+          setNewComment({ ...newComment, [postId]: '' }); // Clear comment for specific post ID
+       } catch (err) {
+          console.error('Error adding comment:', err);
+       }
     }
-  };
+ };
 
   const toggleComments = (postId) => {
     if (openedPostId === postId) {
@@ -111,8 +112,8 @@ const CommunityBoard = () => {
               <textarea
                 rows="2"
                 placeholder="Add your comment..."
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
+                value={newComment[post._id] || ''}  // Fetch comment for specific post ID
+                onChange={(e) => setNewComment({ ...newComment, [post._id]: e.target.value })} // Update comment for specific post ID
               />
               <button onClick={() => handleCommentSubmit(post._id)}>Comment</button>
             </div>
