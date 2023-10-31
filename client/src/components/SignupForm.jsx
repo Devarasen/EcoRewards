@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { ADD_USER } from '../utils/mutations';
 import Auth from '../utils/auth';
+import './Component.css';
 
 const SignupForm = () => {
   const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' });
@@ -54,6 +55,8 @@ const SignupForm = () => {
         {showAlert && <div className='alert alert-danger'>Something went wrong with your signup!</div>}
         
         <div>
+          <h2>Sign Up</h2>
+          <br />
           <label htmlFor='username'>Username : </label>
           <input 
             type='text'
