@@ -17,6 +17,10 @@ const CommunityBoard = () => {
 
   const { data, loading, error } = useQuery(GET_ALL_POSTS);
 
+  const sortedPosts = data?.getAllPosts?.slice().sort((a, b) => {
+    return Number(b.timestamp) - Number(a.timestamp);
+  });
+
   const [createPost] = useMutation(CREATE_POST, {
     refetchQueries: [{ query: GET_ALL_POSTS }],
   });
@@ -78,7 +82,7 @@ const CommunityBoard = () => {
       </div>
 
       <div className="posts">
-        {data?.getAllPosts?.map((post) => (
+        {sortedPosts?.map((post) => (
           <div className="post" key={post._id}>
             <div className="post-user">
               <Link to={`/profile/${post?.author?._id}`}>
@@ -92,7 +96,7 @@ const CommunityBoard = () => {
 
             {/* Show 'See Comments' only if there are comments */}
             {post.comments.length > 0 && (
-              <button onClick={() => toggleComments(post._id)}>See Comments</button>
+              <button className="see-comment-btn" onClick={() => toggleComments(post._id)}>Show/Hide Comments</button>
             )}
 
             {openedPostId === post._id && post.comments.map(comment => (

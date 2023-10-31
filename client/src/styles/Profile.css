@@ -116,3 +116,37 @@
     background-color: #45a049;
 }
 
+/* Post styling */
+.profile-posts-all {
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-post {
+    background-color: #ffffff;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;  /* Stacking the author details and content vertically */
+    align-items: flex-start;  /* Start everything from the left */
+}
+
+.profile-post div {
+    display: flex;  /* Makes elements within this div sit side-by-side */
+    align-items: center;  /* Vertically aligns elements on the same baseline */
+}
+
+.profile-post p {
+    margin: 0;
+    margin-right: 10px;  /* Gives a little space between username and timestamp */
+}
+
+/* Styling to make the username and timestamp appear on the same line */
+.profile-post div:first-child {
+    margin-bottom: 10px;  /* Adds some space between the author details and content */
+}
+
